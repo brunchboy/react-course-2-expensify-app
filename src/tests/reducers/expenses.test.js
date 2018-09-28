@@ -72,3 +72,30 @@ test('edit should have no effect without id match', () => {
   const state = expensesReducer(expenses, action);
   expect(state).toEqual(expenses);
 });
+
+test('should set expenses', () => {
+  const replacementExpenses = [
+    {
+      id: '9',
+      description: 'Sonic screwdriver',
+      note: `Don't leave your home planet without one!`,
+      amount: 1995,
+      createdAt: -390000
+    },
+    {
+      id: '42',
+      description: 'Guide to the Galaxy',
+      note: `A bargain at twice the price! And really, don't panic.`,
+      amount: 4199,
+      createdAt: moment(0)
+        .add(422, 'years')
+        .valueOf()
+    }
+  ];
+  const action = {
+    type: 'SET_EXPENSES',
+    expenses: replacementExpenses
+  };
+  const state = expensesReducer(expenses, action);
+  expect(state).toEqual(replacementExpenses);
+});
